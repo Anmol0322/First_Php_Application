@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ANBE-Create New Account</title>
+</head>
+<body>
+
+	<form id="demo">
+
+	<h2><p style="color:firebrick";>Create New Account</p></h2>
+	
+	Enter Firstname:
+		<input type="text" id="firstname"><br><br>
+
+	Enter Surname:
+		<input type="text" id="surname"><br>
+
+	<p>Gender:</p>
+  		<input type="radio" name="gender" value="Male">&nbsp;Male
+  		<input type="radio" name="gender" value="Female">&nbsp;Female
+  		<input type="radio" name="gender" value="Other">&nbsp;Other<br><br>
+
+	Date: 
+    	<input type="date" id="birthday"><br><br>
+
+
+	Enter Email-id:
+		<input type="email" id="email_id"><br><br>
+
+	Enter Password:
+		<input type="password" id="password" placeholder="New Password"><br><br>
+
+
+	Enter Phone-no:
+		<input type="tel" id="phone_no" placeholder="10 digit number" pattern="[0-9]{10}"><br><br>
+
+	<input type="Submit" onclick="newuser()" value="Submit"><br>
+
+	</form>
+
+	<br><a href="LoginInAnbe.html">Back to Login Page</a>
+
+	<p id="demo"></p>
+
+	<script>
+		
+			function newuser() {
+
+				firstname= document.getElementById('firstname').value;
+
+  				surname= document.getElementById('surname').value;
+
+  				birthday= document.getElementById('birthday').value;
+
+  				email_id= document.getElementById('email_id').value;
+
+  				password= document.getElementById('password').value;
+
+  				phone_no= document.getElementById('phone_no').value;
+
+  				var genders = document.getElementsByName('gender');
+   				var selectedGender;
+   				for(var i = 0; i < genders.length; i++) {
+   					if(genders[i].checked)
+       				{
+        				selectedGender = genders[i].value;
+    				}
+				}
+
+				var xhttp = new XMLHttpRequest();
+  				xhttp.onreadystatechange = function() {
+    				if (this.readyState == 4 && this.status == 200) {
+     				 	document.getElementById("demo").innerHTML = this.responseText;
+	  					}
+  					};
+  				xhttp.open("GET", "NewAccountInAnbe.php?firstname="+firstname+"&surname="+surname+"&gender="+selectedGender+"&birthday="+birthday+"&email_id="+email_id+"&password="+password+"&phone_no="+phone_no, true);
+  				xhttp.send();	
+
+  				document.getElementById("demo").reset();
+			}
+
+	</script>
+  	
+</body>
+</html>
